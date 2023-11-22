@@ -14,62 +14,6 @@
   </head>
   <body>
     <canvas></canvas>
-    <script>
-      const canvasElement = document.querySelector("canvas");
-      const canvasContext = canvasElement.getContext("2d");
-
-      const lineWidth = 15;
-
-      function setup() {
-        canvasElement.width = canvasContext.width = window.innerWidth;
-        canvasElement.height = canvasContext.height = window.innerHeight;
-      }
-
-      function draw() {
-        // Green field
-        canvasContext.fillStyle = "#286047";
-        canvasContext.fillRect(0, 0, window.innerWidth, window.innerHeight);
-
-        // Center Line
-        canvasContext.fillStyle = "#ffffff";
-        canvasContext.fillRect(
-          window.innerWidth / 2 - lineWidth / 2,
-          0,
-          lineWidth,
-          window.innerHeight
-        );
-
-        // Left paddle
-        canvasContext.fillRect(10, 400, lineWidth, 200);
-
-        // Right paddle
-        canvasContext.fillRect(
-          window.innerWidth - lineWidth - 10,
-          400,
-          lineWidth,
-          200
-        );
-
-        // Ball
-        canvasContext.beginPath();
-        canvasContext.arc(200, 300, 20, 0, 2 * Math.PI, false);
-        canvasContext.fill();
-
-        // Scoreboard
-        canvasContext.font = "bold 72px Arial";
-        canvasContext.textAlign = "center";
-        canvasContext.textBaseline = "top";
-        canvasContext.fillStyle = "#01341D";
-        canvasContext.fillText("3", window.innerWidth / 4, 50);
-        canvasContext.fillText(
-          "1",
-          window.innerWidth / 4 + window.innerWidth / 2,
-          50
-        );
-      }
-
-      setup();
-      draw();
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
