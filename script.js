@@ -2,6 +2,7 @@ const canvasElement = document.querySelector("canvas");
 const canvasContext = canvasElement.getContext("2d");
 
 const gapX = 10;
+const mouse = { x: 0, y: 0 };
 
 const field = {
   w: window.innerWidth,
@@ -23,21 +24,32 @@ const centerLine = {
 
 const leftPaddle = {
   x: gapX,
-  y: 100,
+  y: 0,
   w: centerLine.w,
   h: 200,
+  _move: function () {
+    this.y = mouse.y - this.h / 2;
+  },
   draw: function () {
+    canvasContext.fillStyle = "#ffffff";
     canvasContext.fillRect(this.x, this.y, this.w, this.h);
+
+    this._move();
   },
 };
 
 const rightPaddle = {
   x: field.w - centerLine.w - gapX,
-  y: 100,
+  y: 1,
   w: centerLine.w,
   h: 200,
+  _move: function () {
+    this.y = ball.y;
+  },
   draw: function () {
-    canvasContext.fillRect(this.x, this.h, this.w, this.h);
+    canvasContext.fillStyle = "#ffffff";
+    canvasContext.fillRect(this.x, this.y, this.w, this.h);
+    this._move();
   },
 };
 
@@ -106,3 +118,8 @@ function main() {
 
 setup();
 main();
+
+canvasElement.addEventListener("mousemove", function (e) {
+  mouse.x = e.pageX;
+  mouse.y = e.pageY;
+});
