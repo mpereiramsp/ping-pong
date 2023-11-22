@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ping-Pong</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas></canvas>
+    <script>
+      const canvasElement = document.querySelector("canvas");
+      const canvasContext = canvasElement.getContext("2d");
+
+      function setup() {
+        canvasElement.width = canvasContext.width = window.innerWidth;
+        canvasElement.height = canvasContext.height = window.innerHeight;
+      }
+
+      function draw() {
+        canvasContext.fillStyle = "#286047";
+        canvasContext.fillRect(0, 0, window.innerWidth, window.innerHeight);
+      }
+
+      setup();
+      draw();
+    </script>
+  </body>
+</html>
