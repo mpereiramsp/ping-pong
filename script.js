@@ -58,11 +58,17 @@ const ball = {
   x: 300,
   y: 200,
   r: 20,
+  speed: 4,
+  _move: function () {
+    this.x += 1 * this.speed;
+    this.y += 1 * this.speed;
+  },
   draw: function () {
     canvasContext.fillStyle = "#ffffff";
     canvasContext.beginPath();
     canvasContext.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
     canvasContext.fill();
+    this._move();
   },
 };
 
@@ -80,5 +86,23 @@ function draw() {
   ball.draw();
 }
 
+window.animateFrame = (function () {
+  return (
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    function (callback) {
+      return window.setTimeout(callback, 1000 / 60);
+    }
+  );
+})();
+
+function main() {
+  animateFrame(main);
+  draw();
+}
+
 setup();
-draw();
+main();
