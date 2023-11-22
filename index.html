@@ -49,6 +49,23 @@
           lineWidth,
           200
         );
+
+        // Ball
+        canvasContext.beginPath();
+        canvasContext.arc(200, 300, 20, 0, 2 * Math.PI, false);
+        canvasContext.fill();
+
+        // Scoreboard
+        canvasContext.font = "bold 72px Arial";
+        canvasContext.textAlign = "center";
+        canvasContext.textBaseline = "top";
+        canvasContext.fillStyle = "#01341D";
+        canvasContext.fillText("3", window.innerWidth / 4, 50);
+        canvasContext.fillText(
+          "1",
+          window.innerWidth / 4 + window.innerWidth / 2,
+          50
+        );
       }
 
       setup();
