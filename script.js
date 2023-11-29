@@ -43,8 +43,16 @@ const rightPaddle = {
   y: 1,
   w: centerLine.w,
   h: 200,
+  speed: 1,
+  speedUp: function () {
+    this.speed += 0.2;
+  },
   _move: function () {
-    this.y = ball.y;
+    if (this.y + this.h / 2 < ball.y + ball.r) {
+      this.y += this.speed;
+    } else {
+      this.y -= this.speed;
+    }
   },
   draw: function () {
     canvasContext.fillStyle = "#ffffff";
@@ -73,10 +81,10 @@ const scoreBoard = {
 };
 
 const ball = {
-  x: 31,
-  y: 31,
+  x: 50,
+  y: 50,
   r: 20,
-  speed: 4,
+  speed: 2,
   directionX: 1,
   directionY: 1,
   _calcPosition: function () {
@@ -106,7 +114,7 @@ const ball = {
         this._reverseX();
       } else {
         scoreBoard.increasePc();
-        this._pointUp()
+        this._pointUp();
       }
     }
   },
@@ -116,9 +124,15 @@ const ball = {
   _reverseY: function () {
     this.directionY = this.directionY * -1;
   },
+  _speedUp: function () {
+    this.speed += 0.4;
+  },
   _pointUp: function () {
     this.x = field.w / 2;
     this.y = field.h / 2;
+
+    this._speedUp();
+    rightPaddle.speedUp();
   },
   _move: function () {
     this.x += this.directionX * this.speed;
