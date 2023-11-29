@@ -54,8 +54,14 @@ const rightPaddle = {
 };
 
 const scoreBoard = {
-  human: 1,
-  pc: 2,
+  human: 0,
+  pc: 0,
+  increaseHuman: function () {
+    this.human++;
+  },
+  increasePc: function () {
+    this.pc++;
+  },
   draw: function () {
     canvasContext.font = "bold 72px Arial";
     canvasContext.textAlign = "center";
@@ -67,8 +73,8 @@ const scoreBoard = {
 };
 
 const ball = {
-  x: 0,
-  y: 0,
+  x: 31,
+  y: 31,
   r: 20,
   speed: 4,
   directionX: 1,
@@ -80,12 +86,39 @@ const ball = {
     ) {
       this._reverseY();
     }
+    if (this.x > field.w - this.r - rightPaddle.w - gapX) {
+      if (
+        this.y + this.r > rightPaddle.y &&
+        this.y - this.r < rightPaddle.y + rightPaddle.h
+      ) {
+        this._reverseX();
+      } else {
+        scoreBoard.increaseHuman();
+        this._pointUp();
+      }
+    }
+
+    if (this.x < this.r + leftPaddle.w + gapX) {
+      if (
+        this.y + this.r > leftPaddle.y &&
+        this.y - this.r < leftPaddle.y + leftPaddle.h
+      ) {
+        this._reverseX();
+      } else {
+        scoreBoard.increasePc();
+        this._pointUp()
+      }
+    }
   },
   _reverseX: function () {
     this.directionX = this.directionX * -1;
   },
   _reverseY: function () {
     this.directionY = this.directionY * -1;
+  },
+  _pointUp: function () {
+    this.x = field.w / 2;
+    this.y = field.h / 2;
   },
   _move: function () {
     this.x += this.directionX * this.speed;
