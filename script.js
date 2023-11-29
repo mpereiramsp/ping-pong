@@ -145,13 +145,13 @@ const ball = {
     rightPaddle.speedUp();
   },
   _winner: function () {
-    if (scoreBoard.human == 10) {
+    if (scoreBoard.human == 13) {
       alert("Parabéns! Você ganhou!!!");
       this._resetBallSpeed();
       rightPaddle.resetSpeed();
       scoreBoard.resetPoints();
     }
-    if (scoreBoard.pc == 10) {
+    if (scoreBoard.pc == 13) {
       alert("Que pena, você perdeu.");
       this._resetBallSpeed();
       rightPaddle.resetSpeed();
