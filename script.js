@@ -43,12 +43,12 @@ const rightPaddle = {
   y: 1,
   w: centerLine.w,
   h: 200,
-  speed: 1,
+  speed: 1.5,
   resetSpeed: function () {
-    this.speed = 1;
+    this.speed = 1.5;
   },
   speedUp: function () {
-    this.speed += 0.3;
+    this.speed += 0.35;
   },
   _move: function () {
     if (this.y + this.h / 2 < ball.y + ball.r) {
