@@ -43,12 +43,12 @@ const rightPaddle = {
   y: 1,
   w: centerLine.w,
   h: 200,
-  speed: 1.5,
+  speed: 2,
   resetSpeed: function () {
-    this.speed = 1.5;
+    this.speed = 2;
   },
   speedUp: function () {
-    this.speed += 0.35;
+    this.speed += 0.5;
   },
   _move: function () {
     if (this.y + this.h / 2 < ball.y + ball.r) {
@@ -91,7 +91,7 @@ const ball = {
   x: 50,
   y: 50,
   r: 20,
-  speed: 2,
+  speed: 3,
   directionX: 1,
   directionY: 1,
   _calcPosition: function () {
@@ -132,10 +132,10 @@ const ball = {
     this.directionY = this.directionY * -1;
   },
   _speedUp: function () {
-    this.speed += 0.4;
+    this.speed += 0.7;
   },
   _resetBallSpeed: function () {
-    this.speed = 2;
+    this.speed = 3;
   },
   _pointUp: function () {
     this.x = field.w / 2;
