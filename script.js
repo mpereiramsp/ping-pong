@@ -44,8 +44,11 @@ const rightPaddle = {
   w: centerLine.w,
   h: 200,
   speed: 1,
+  resetSpeed: function () {
+    this.speed = 1;
+  },
   speedUp: function () {
-    this.speed += 0.2;
+    this.speed += 0.3;
   },
   _move: function () {
     if (this.y + this.h / 2 < ball.y + ball.r) {
@@ -69,6 +72,10 @@ const scoreBoard = {
   },
   increasePc: function () {
     this.pc++;
+  },
+  resetPoints: function () {
+    this.human = 0;
+    this.pc = 0;
   },
   draw: function () {
     canvasContext.font = "bold 72px Arial";
@@ -127,12 +134,29 @@ const ball = {
   _speedUp: function () {
     this.speed += 0.4;
   },
+  _resetBallSpeed: function () {
+    this.speed = 2;
+  },
   _pointUp: function () {
     this.x = field.w / 2;
     this.y = field.h / 2;
 
     this._speedUp();
     rightPaddle.speedUp();
+  },
+  _winner: function () {
+    if (scoreBoard.human == 10) {
+      alert("Parabéns! Você ganhou!!!");
+      this._resetBallSpeed();
+      rightPaddle.resetSpeed();
+      scoreBoard.resetPoints();
+    }
+    if (scoreBoard.pc == 10) {
+      alert("Que pena, você perdeu.");
+      this._resetBallSpeed();
+      rightPaddle.resetSpeed();
+      scoreBoard.resetPoints();
+    }
   },
   _move: function () {
     this.x += this.directionX * this.speed;
@@ -146,6 +170,7 @@ const ball = {
 
     this._calcPosition();
     this._move();
+    this._winner();
   },
 };
 
