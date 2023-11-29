@@ -62,24 +62,42 @@ const scoreBoard = {
     canvasContext.textBaseline = "top";
     canvasContext.fillStyle = "#01341D";
     canvasContext.fillText(this.human, field.w / 4, 50);
-    canvasContext.fillText(this.pc, field.w / 4 + field.w / 2, 50);
+    canvasContext.fillText(this.pc, field.w / 1.32, 50);
   },
 };
 
 const ball = {
-  x: 300,
-  y: 200,
+  x: 0,
+  y: 0,
   r: 20,
   speed: 4,
+  directionX: 1,
+  directionY: 1,
+  _calcPosition: function () {
+    if (
+      (this.y - this.r < 0 && this.directionY < 0) ||
+      (this.y > field.h - this.r && this.directionY > 0)
+    ) {
+      this._reverseY();
+    }
+  },
+  _reverseX: function () {
+    this.directionX = this.directionX * -1;
+  },
+  _reverseY: function () {
+    this.directionY = this.directionY * -1;
+  },
   _move: function () {
-    this.x += 1 * this.speed;
-    this.y += 1 * this.speed;
+    this.x += this.directionX * this.speed;
+    this.y += this.directionY * this.speed;
   },
   draw: function () {
     canvasContext.fillStyle = "#ffffff";
     canvasContext.beginPath();
     canvasContext.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
     canvasContext.fill();
+
+    this._calcPosition();
     this._move();
   },
 };
